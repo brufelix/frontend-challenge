@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "@nextui-org/react";
-import { Card } from "~/components/ui/Card";
 import { getProductQuery, queryKeys } from "~/common/queries";
+import { Card } from "~/components/ui/Card";
+import { useBasket } from "~/hooks/use-basket.hook";
 
 export const DashboardPage = () => {
+  const { items } = useBasket();
 
   const products = useQuery({
     refetchOnWindowFocus: false,
@@ -19,12 +21,14 @@ export const DashboardPage = () => {
     );
   }
 
-
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-      {(products.data || []).map(product => (
-        <Card {...product} />
-      ))}
+      {(products.data || [])
+        // Removendo os itens que já estão na sacola
+        .filter(p => !items.find(basketItem => basketItem.id === p.id))
+        .map(product => (
+          <Card {...product} />
+        ))}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useSettings } from "~/hooks/use-settings.hook";
 import { SidebarItem } from "./SideItem";
 import { SidebarStyled } from "./styled";
+import { URLS } from "~/constants/urls";
 
 export const Sidebar = () => {
   const location = useLocation();
@@ -53,7 +54,7 @@ export const Sidebar = () => {
               title="Carrinho"
               icon={<ShoppingBagIcon />}
               isActive={pathname === "/basket"}
-              href="/basket"
+              href={URLS.basket}
             />
           </div>
 
