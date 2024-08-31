@@ -1,5 +1,5 @@
 import { cn } from "@nextui-org/react";
-import { DollarSign, } from "lucide-react";
+import { DollarSign, ShoppingBagIcon, } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useSettings } from "~/hooks/use-settings.hook";
 import { SidebarItem } from "./SideItem";
@@ -47,6 +47,13 @@ export const Sidebar = () => {
               icon={<DollarSign />}
               isActive={pathname === "/"}
               href="/"
+            />
+
+            <SidebarItem
+              title="Carrinho"
+              icon={<ShoppingBagIcon />}
+              isActive={pathname === "/basket"}
+              href="/basket"
             />
           </div>
 
