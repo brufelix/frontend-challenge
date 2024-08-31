@@ -45,7 +45,7 @@ export const BasketPage: React.FC = () => {
   }
 
   return (
-    <div className={cn('p-6', isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black')}>
+    <div className={cn('p-6 shadow-md rounded-lg', isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black')}>
       <h1 className="text-2xl font-bold mb-4">Carrinho de Compras</h1>
       {items.length === 0 ? (
         <p className="text-lg">Seu carrinho está vazio.</p>
@@ -53,7 +53,7 @@ export const BasketPage: React.FC = () => {
         <div>
           <ul>
             {items.map(item => (
-              <li key={item.id} className="flex items-center justify-between p-4 mb-4 bg-white shadow-md rounded-md">
+              <li key={item.id} className={cn('flex items-center justify-between p-4 mb-4 shadow-lg rounded-md', isDarkMode ? 'bg-gray-900 text-white' : 'bg-zinc-100 text-black')}>
                 <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded" />
                 <div className="flex-grow px-4">
                   <h2 className="font-semibold">{item.title}</h2>
