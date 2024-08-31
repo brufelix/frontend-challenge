@@ -5,11 +5,14 @@ import { ThemeProvider } from "./providers/Theme.provider.tsx";
 
 import "./styles/global.css";
 import "react-toastify/dist/ReactToastify.css";
+import { BasketProvider } from "./providers/Basket.provider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <BasketProvider>
+        <App />
+      </BasketProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

@@ -1,17 +1,16 @@
-import { cn } from "@nextui-org/react";
-import { DollarSign, } from "lucide-react";
+import { Badge, cn } from "@nextui-org/react";
+import { DollarSign, ShoppingBagIcon, } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useSettings } from "~/hooks/use-settings.hook";
 import { SidebarItem } from "./SideItem";
 import { SidebarStyled } from "./styled";
+import { URLS } from "~/constants/urls";
+import { useBasket } from "~/hooks/use-basket.hook";
 
 export const Sidebar = () => {
   const location = useLocation();
-  const {
-    hideSidebar,
-    sidebarCollapsed,
-    onSidebarCollapsedToggle,
-  } = useSettings();
+  const { hideSidebar, sidebarCollapsed, onSidebarCollapsedToggle, } = useSettings();
+  const { items } = useBasket();
 
   const pathname = location.pathname;
 
@@ -47,6 +46,21 @@ export const Sidebar = () => {
               icon={<DollarSign />}
               isActive={pathname === "/"}
               href="/"
+            />
+
+            <SidebarItem
+              title="Carrinho"
+              icon={
+                items.length
+                  ? (
+                    <Badge content={items.length || 0} color="primary">
+                      <ShoppingBagIcon />
+                    </Badge>
+                  )
+                  : <ShoppingBagIcon />
+              }
+              isActive={pathname === "/basket"}
+              href={URLS.basket}
             />
           </div>
 

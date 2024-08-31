@@ -1,8 +1,10 @@
 import { useTheme } from '~/hooks/use-theme.hook';
 import { Card as CardNextUi, CardBody, CardFooter, cn, Button } from '@nextui-org/react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { ShoppingBag } from 'lucide-react';
 import { toCurrency } from '~/utils/to-currency.util';
+import { useBasket } from '~/hooks/use-basket.hook';
+import { notify } from '~/utils/notify.util';
 
 interface Props {
   id: number;
@@ -12,16 +14,25 @@ interface Props {
   description: string;
 }
 
-export const Card = ({ description, price, title, image }: Props) => {
+export const Card = ({ id, description, price, title, image }: Props) => {
   const { isDarkMode } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
+  const { items, setItems } = useBasket();
 
-  // Formatação do preço
-  const formattedPrice = toCurrency(price);
+  // Usando useMemo para memorizar o preço formatado
+  const formattedPrice = useMemo(() => toCurrency(price), [price]);
 
-  // Truncar a descrição para mostrar no máximo 4 linhas
+  // Usando useMemo para memorizar o texto da descrição truncada ou completa
+  const descriptionText = useMemo(() => {
+    return isExpanded ? description : description.substring(0, 100) + (description.length > 100 ? '...' : '');
+  }, [isExpanded, description]);
+
   const toggleDescription = () => setIsExpanded(!isExpanded);
-  const descriptionText = isExpanded ? description : description.substring(0, 100) + (description.length > 100 ? '...' : '');
+
+  const addNewItem = () => {
+    setItems([...items, { id, description, price, title, image, quantity: 1 }]);
+    notify('Item adicionado no carrinho', { type: 'success' });
+  }
 
   return (
     <CardNextUi className="transform transition-transform duration-400 hover:-translate-y-2 border-none rounded-md shadow-lg">
@@ -41,7 +52,11 @@ export const Card = ({ description, price, title, image }: Props) => {
         <h1 className="font-semibold text-xl">{formattedPrice}</h1>
       </CardBody>
       <CardFooter className={cn('p-4', isDarkMode ? 'bg-zinc-800' : 'bg-zinc-100')}>
-        <Button startContent={<ShoppingBag />} className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+        <Button
+          onClick={() => addNewItem()}
+          startContent={<ShoppingBag />}
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+        >
           Adicionar ao Carrinho
         </Button>
       </CardFooter>
