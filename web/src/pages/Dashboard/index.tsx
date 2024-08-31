@@ -4,6 +4,8 @@ import { getProductQuery, queryKeys } from "~/common/queries";
 import { Card } from "~/components/ui/Card";
 import { useBasket } from "~/hooks/use-basket.hook";
 import { useMemo } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./index.css";
 
 export const DashboardPage = () => {
   const { items } = useBasket();
@@ -14,6 +16,7 @@ export const DashboardPage = () => {
     queryFn: getProductQuery,
   });
 
+  // removendo os produtos que já existem no carrinho de compras 
   const availableProducts = useMemo(() => {
     return (productsQuery.data || []).filter(p => !items.find(basketItem => basketItem.id === p.id));
   }, [productsQuery.data, items]);
@@ -27,10 +30,12 @@ export const DashboardPage = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+    <TransitionGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
       {availableProducts.map(product => (
-        <Card key={product.id} {...product} />
+        <CSSTransition key={product.id} timeout={300} classNames="fade">
+          <Card {...product} />
+        </CSSTransition>
       ))}
-    </div>
+    </TransitionGroup>
   );
 };
