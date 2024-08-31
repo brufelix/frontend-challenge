@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+  background-color: #888;
+}
+
+nav {
+  @apply !border-b-zinc-100 dark:!border-b-zinc-800 dark:bg-zinc-950;
+}
+
+nav[role="navigation"] {
+  @apply dark:bg-transparent;
+}
+
+.max-h-screen {
+  height: calc(100vh - 64px);
+}
