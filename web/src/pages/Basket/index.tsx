@@ -39,7 +39,7 @@ export const BasketPage: React.FC = () => {
   };
 
   const handleFinish = () => {
-    notify('Compra finalizado com sucesso!', { type: 'success' });
+    notify('Compra finalizada com sucesso!', { type: 'success' });
     setItems([]);
     navigate(URLS.dashboard);
   }
