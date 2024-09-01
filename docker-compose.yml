@@ -7,5 +7,6 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=production
-    env_file:
-      - ./web/.env
+      - VITE_IS_PRODUCTION=false
+      - VITE_PUBLIC_URL=http://localhost:3000
+      - VITE_BASE_API_URL=https://fakestoreapi.com
