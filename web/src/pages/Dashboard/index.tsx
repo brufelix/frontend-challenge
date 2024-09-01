@@ -10,6 +10,7 @@ import "./index.css";
 export const DashboardPage = () => {
   const { items } = useBasket();
 
+  // Obtendo listagens de produtos
   const productsQuery = useQuery({
     refetchOnWindowFocus: false,
     queryKey: [queryKeys.list],
