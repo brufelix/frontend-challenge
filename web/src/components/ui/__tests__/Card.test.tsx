@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Card } from '../Card'; // ajuste o caminho conforme necessário
+import { Card } from '../Card';
 import { useBasket } from '~/hooks/use-basket.hook';
 import { useTheme } from '~/hooks/use-theme.hook';
 
