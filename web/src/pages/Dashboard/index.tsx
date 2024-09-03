@@ -5,7 +5,6 @@ import { Card } from "~/components/ui/Card";
 import { useBasket } from "~/hooks/use-basket.hook";
 import { useMemo } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import "./index.css";
 
 export const DashboardPage = () => {
   const { items } = useBasket();
