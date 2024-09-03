@@ -22,3 +22,21 @@ nav[role="navigation"] {
 .max-h-screen {
   height: calc(100vh - 64px);
 }
+
+/* CSS customizado */
+
+.fade-enter {
+  @apply opacity-0 transform scale-95;
+}
+
+.fade-enter-active {
+  @apply opacity-100 transform scale-100 transition-opacity transition-transform duration-300;
+}
+
+.fade-exit {
+  @apply opacity-100 transform scale-100;
+}
+
+.fade-exit-active {
+  @apply opacity-0 transform scale-95 transition-opacity transition-transform duration-300;
+}
