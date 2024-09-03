@@ -58,11 +58,11 @@ export const BasketPage: React.FC = () => {
                 <div className="flex-grow px-4">
                   <h2 className="font-semibold">{item.title}</h2>
                   <div className="flex items-center space-x-2">
-                    <Button isIconOnly onClick={() => handleDecrement(item.id)}>
+                    <Button isIconOnly onClick={() => handleDecrement(item.id)} aria-label='decrement-item'>
                       <Minus size={15} />
                     </Button>
                     <span>{item.quantity}</span>
-                    <Button isIconOnly onClick={() => handleIncrement(item.id)}>
+                    <Button isIconOnly onClick={() => handleIncrement(item.id)} aria-label='increment-item'>
                       <Plus size={15} />
                     </Button>
                   </div>
